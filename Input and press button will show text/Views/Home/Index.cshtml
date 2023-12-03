@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Show text";
+}
+<head>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <form id="ShowTextForm" method="post">
+        <div class="form-group">
+            <input type="text" id="text" name="text" placeholder="Input text" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Show</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        $(function () {
+            $("#ShowTextForm").submit(function (e) {
+                e.preventDefault();
+                var Text = $("#text").val();
+                $.ajax({
+                    type: "POST",
+                    url: "/HOME/ShowText",
+                    data: { text: Text },
+                    success: function (data) {
+                        $("#result").html(data);
+                    },
+                    error: function () {
+                        console.error("Có lỗi xảy ra khi gửi biểu mẫu");
+                    }
+                });
+            });
+        })
+    </script>
+
+</body>
